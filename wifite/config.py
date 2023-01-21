@@ -38,6 +38,8 @@ class Configuration(object):
 
         cls.tx_power = 0 # Wifi transmit power (0 is default)
         cls.interface = None
+        cls.interface_scan = None # Scan focused interface
+        cls.interface_attack = None # Attack focused interface
         cls.target_channel = None # User-defined channel to scan
         cls.target_essid = None # User-defined AP name
         cls.target_bssid = None # User-defined AP BSSID
@@ -126,10 +128,11 @@ class Configuration(object):
 
     @classmethod
     def get_monitor_mode_interface(cls):
-        if cls.interface is None:
+        if cls.interface is None and (cls.interface_attack is None or cls.interface_scan is None):
             # Interface wasn't defined, select it!
+            # Interface_attack and Interface_scan weren't defined
             from .tools.airmon import Airmon
-            cls.interface = Airmon.ask()
+            cls.interface = Airmon.ask() 
             if cls.random_mac:
                 Macchanger.random()
 
@@ -187,6 +190,19 @@ class Configuration(object):
             cls.interface = args.interface
             Color.pl('{+} {C}option:{W} using wireless interface ' +
                     '{G}%s{W}' % args.interface)
+
+        if args.interfacea:
+            cls.interface_attack = args.interfacea
+            Color.pl('{+} {C}option:{W} attacking using wireless interface ' +
+                    '{G}%s{W}' % args.interfacea)
+
+        if args.interfacep:
+            cls.interface_scan = args.interfacep
+            Color.pl('{+} {C}option:{W} scanning using wireless interface ' +
+                    '{G}%s{W}' % args.interfacep)
+
+        if cls.interface_scan is not None and cls.interface_attack is not None:
+            cls.scan_time = 15
 
         if args.target_bssid:
             cls.target_bssid = args.target_bssid

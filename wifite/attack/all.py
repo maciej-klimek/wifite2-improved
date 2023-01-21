@@ -8,7 +8,103 @@ from .pmkid import AttackPMKID
 from ..config import Configuration
 from ..util.color import Color
 
-class AttackAll(object):
+class AttackAll(object): #WIP
+    @classmethod 
+    def dual_attack_multiple(cls, targets):
+        '''
+        Attacks all given `targets` (list[wifite.model.target]) until user interruption.
+        Returns: Number of targets that were attacked (int)
+        '''
+        if any(t.wps for t in targets) and not AttackWPS.can_attack_wps():
+            # Warn that WPS attacks are not available.
+            Color.pl('{!} {O}Note: WPS attacks are not possible because you do not have {C}reaver{O} nor {C}bully{W}')
+        interfacep = Configuration.interface_scan
+        interfacea = Configuration.interface_attack
+
+        attacked_targets = 0
+        targets_remaining = len(targets)
+        for index, target in enumerate(targets, start=1):
+            attacked_targets += 1
+            targets_remaining -= 1
+
+            bssid = target.bssid
+            essid = target.essid if target.essid_known else '{O}ESSID unknown{W}'
+
+            Color.pl('\n{+} ({G}%d{W}/{G}%d{W})' % (index, len(targets)) +
+                     ' Starting attacks against {C}%s{W} ({C}%s{W})' % (bssid, essid))
+
+            #should_continue = cls.dual_attack_single(target, targets_remaining, interfacea, "attack")
+            threading.Thread(target=dual_attack_single,args=(target,targets_remaining,interfacea,"attack"))
+            if not should_continue:
+                break
+
+        return attacked_targets
+    @classmethod
+    def dual_attack_single(cls, target, targets_remaining,interface,attack_type): #WIP
+        '''
+        Attacks a single `target` (wifite.model.target).
+        Returns: True if attacks should continue, False otherwise.
+        '''
+
+        attacks = []
+
+        if Configuration.use_eviltwin:
+            # TODO: EvilTwin attack
+            pass
+
+        elif 'WEP' in target.encryption:
+            attacks.append(AttackWEP(target))
+
+        elif 'WPA' in target.encryption:
+            # WPA can have multiple attack vectors:
+
+            # WPS
+            if not Configuration.use_pmkid_only:
+                if target.wps != False and AttackWPS.can_attack_wps():
+                    # Pixie-Dust
+                    if Configuration.wps_pixie:
+                        attacks.append(AttackWPS(target, pixie_dust=True))
+
+                    # PIN attack
+                    if Configuration.wps_pin:
+                        attacks.append(AttackWPS(target, pixie_dust=False))
+
+            if not Configuration.wps_only:
+                # PMKID
+                attacks.append(AttackPMKID(target))
+
+                # Handshake capture
+                if not Configuration.use_pmkid_only:
+                    attacks.append(AttackWPA(target))
+
+        if len(attacks) == 0:
+            Color.pl('{!} {R}Error: {O}Unable to attack: no attacks available')
+            return True  # Keep attacking other targets (skip)
+
+        while len(attacks) > 0:
+            attack = attacks.pop(0)
+            try:
+                result = attack.run()
+                if result:
+                    break  # Attack was successful, stop other attacks.
+            except Exception as e:
+                Color.pexception(e)
+                continue
+            except KeyboardInterrupt:
+                Color.pl('\n{!} {O}Interrupted{W}\n')
+                answer = cls.user_wants_to_continue(targets_remaining, len(attacks))
+                if answer is True:
+                    continue  # Keep attacking the same target (continue)
+                elif answer is None:
+                    return True  # Keep attacking other targets (skip)
+                else:
+                    return False  # Stop all attacks (exit)
+
+        if attack.success:
+            attack.crack_result.save()
+
+        return True  # Keep attacking other targets
+
 
     @classmethod
     def attack_multiple(cls, targets):

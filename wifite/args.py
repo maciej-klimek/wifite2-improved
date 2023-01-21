@@ -55,6 +55,22 @@ class Arguments(object):
             help=Color.s('Wireless interface to use, e.g. {C}wlan0mon{W} ' +
                 '(default: {G}ask{W})'))
 
+        glob.add_argument('-iA',
+            action='store',
+            dest='interfacea',
+            metavar='[interfacea]',
+            type=str,
+            help=Color.s('Wireless interface to use, e.g. {C}wlan0mon{W} ' +
+                '(default: {G}ask{W})'))
+
+        glob.add_argument('-iP',
+            action='store',
+            dest='interfacep',
+            metavar='[interfacep]',
+            type=str,
+            help=Color.s('Wireless interface to use, e.g. {C}wlan0mon{W} ' +
+                '(default: {G}ask{W})'))
+
         glob.add_argument('-c',
             action='store',
             dest='channel',

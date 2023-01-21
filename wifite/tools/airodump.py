@@ -22,14 +22,25 @@ class Airodump(Dependency):
                        output_file_prefix='airodump',\
                        ivs_only=False, skip_wps=False, delete_existing_files=True):
         '''Sets up airodump arguments, doesn't start process yet.'''
+        interface_attack = None
+        interface_scan = None
+        #interface_dual = False
+
 
         Configuration.initialize()
 
+        if interface_attack is None:
+            interface_attack = Configuration.interface_attack
+        if interface_scan is None:
+            interface_scan = Configuration.interface_scan
         if interface is None:
             interface = Configuration.interface
-        if interface is None:
-            raise Exception('Wireless interface must be defined (-i)')
-        self.interface = interface
+        if interface is None and (interface_attack is None and interface_scan is None):
+            raise Exception('Wireless interface must be defined (-i) or -iA AND -iP')
+        if interface_attack is not None and interface_scan is not None:
+            self.interface = interface_scan
+        else:
+            self.interface = interface
 
         self.targets = []
 

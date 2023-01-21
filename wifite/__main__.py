@@ -77,9 +77,11 @@ class Wifite(object):
         # Scan
         s = Scanner()
         targets = s.select_targets()
-
+        if (Configuration.interface_attack is not None and Configuration.interface_scan is not None):
+            attacked_targets = AttackAll.dual_attack_multiple(targets)
+        else:
         # Attack
-        attacked_targets = AttackAll.attack_multiple(targets)
+            attacked_targets = AttackAll.attack_multiple(targets)
 
         Color.pl('{+} Finished attacking {C}%d{W} target(s), exiting' % attacked_targets)
 
