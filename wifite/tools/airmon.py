@@ -8,10 +8,20 @@ from ..util.process import Process
 from ..util.color import Color
 from ..util.input import raw_input
 from ..config import Configuration
+from ..model.network_interface import NetworkInterface
 
 import re
 import os
 import signal
+import shutil
+
+def which(cmd):
+    """Return the path of the executable if found in PATH, else None."""
+    for path in os.environ.get("PATH", "").split(os.pathsep):
+        exe_file = os.path.join(path, cmd)
+        if os.path.isfile(exe_file) and os.access(exe_file, os.X_OK):
+            return exe_file
+    return None
 
 class AirmonIface(object):
     def __init__(self, phy, interface, driver, chipset):
@@ -88,7 +98,7 @@ class Airmon(Dependency):
     def get_interfaces():
         '''Returns List of AirmonIface objects known by airmon-ng'''
         interfaces = []
-        p = Process('airmon-ng')
+        p = Process(['airmon-ng'])
         for line in p.stdout().split('\n'):
             # [PHY ]IFACE DRIVER CHIPSET
             airmon_re = re.compile(r'^(?:([^\t]*)\t+)?([^\t]*)\t+([^\t]*)\t+([^\t]*)$')
@@ -319,6 +329,62 @@ class Airmon(Dependency):
             iface.interface = Airmon.start(iface)
         return iface.interface
 
+    @staticmethod
+    def ask2():
+        '''
+        Asks user to define which wireless interfaces to use.
+        Returns an array of NetworkInterface objects with roles set to passive, active, or other.
+        The first interface is set to monitor mode and marked as passive.
+        The second interface (if exists) is left unchanged for internet connection.
+        The third interface (if exists) is set to active.
+        Any additional interfaces are split evenly between passive and active roles.
+        '''
+
+        Airmon.terminate_conflicting_processes()
+
+        Color.p('\n{+} Looking for {C}wireless interfaces{W}...')
+        monitor_interfaces = Iwconfig.get_interfaces(mode='Monitor')
+        airmon = Airmon()
+        count = len(airmon.interfaces)
+
+        if count == 0:
+            Color.pl('\n{!} {O}airmon-ng did not find {R}any{O} wireless interfaces')
+            Color.pl('{!} {O}Make sure your wireless device is connected')
+            Color.pl('{!} {O}See {C}http://www.aircrack-ng.org/doku.php?id=airmon-ng{O} for more info{W}')
+            raise Exception('airmon-ng did not find any wireless interfaces')
+
+        Color.clear_entire_line()
+        airmon.print_menu()
+
+        Color.pl('')
+
+        network_interfaces = []
+        
+        # Set the first interface to monitor mode and passive
+        first_iface = airmon.get(1)
+        first_iface.interface = Airmon.start(first_iface.interface.encode('ascii','ignore'))
+        network_interfaces.append(NetworkInterface(first_iface.interface, 'passive'))
+
+        if count > 1:
+            # If there are only 2 interfaces, leave the second unchanged
+            if count == 2:
+                second_iface = airmon.get(2)
+                network_interfaces.append(NetworkInterface(second_iface.interface, 'other'))
+            else:
+                # Set the second interface to active
+                second_iface = airmon.get(2)
+                network_interfaces.append(NetworkInterface(second_iface.interface, 'active'))
+
+                # For interfaces beyond the second, split roles
+                for index in range(3, count + 1):
+                    iface = airmon.get(index)
+                    if (index - 3) % 2 == 0:
+                        role = 'passive'
+                    else:
+                        role = 'active'
+                    network_interfaces.append(NetworkInterface(iface.interface, role))
+
+        return network_interfaces
 
     @staticmethod
     def terminate_conflicting_processes():
@@ -356,8 +422,13 @@ class Airmon(Dependency):
         for pid, pname in pid_pnames:
             if pname == 'NetworkManager' and Process.exists('service'):
                 Color.pl('{!} {O}stopping network-manager ({R}service network-manager stop{O})')
-                # Can't just pkill network manager; it's a service
-                Process(['service', 'network-manager', 'stop']).wait()
+                # Check if systemd is being used
+                if which('systemctl'):
+                    # Use systemctl to stop the network manager
+                    Process(['systemctl', 'stop', 'NetworkManager']).wait()
+                else:
+                    # Fallback to service command for older systems
+                    Process(['service', 'network-manager', 'stop']).wait()
                 Airmon.killed_network_manager = True
             elif pname == 'avahi-daemon' and Process.exists('service'):
                 Color.pl('{!} {O}stopping avahi-daemon ({R}service avahi-daemon stop{O})')

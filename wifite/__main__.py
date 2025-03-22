@@ -50,7 +50,7 @@ class Wifite(object):
             CrackHelper.run()
 
         else:
-            Configuration.get_monitor_mode_interface()
+            Configuration.get_monitor_mode_interfaces()
             self.scan_and_attack()
 
 

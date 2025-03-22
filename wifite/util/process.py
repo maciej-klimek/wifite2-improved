@@ -66,9 +66,12 @@ class Process(object):
     def __init__(self, command, devnull=False, stdout=PIPE, stderr=PIPE, cwd=None, bufsize=0, stdin=PIPE):
         ''' Starts executing command '''
 
-        if type(command) is str:
-            # Commands have to be a list
-            command = command.split(' ')
+        # Debugging output
+        #print("Executing command:", command)
+
+        # Ensure command is a list of strings
+        if not isinstance(command, list) or not all(isinstance(arg, str) for arg in command):
+            raise ValueError("Command must be a list of strings.")
 
         self.command = command
 

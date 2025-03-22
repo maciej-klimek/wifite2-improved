@@ -14,6 +14,12 @@ Wifite is designed to use all known methods for retrieving the password of a wir
 
 Run wifite, select your targets, and Wifite will automatically start trying to capture or crack the password.
 
+### Future Goals
+---------------------------
+1. **Support for Multiple Network Devices**: Enhance efficiency by allowing the usage of more network devices for simultaneous attacks. (In Progress)
+2. **Remote Server Communication**: Implement functionality to communicate with a remote server to offload intensive tasks, such as brute-forcing from sniffed authentication packets. (Planned)
+3. **GPS Functionality for Wardriving**: Integrate GPS functionality to log the location of wireless networks, including their security status, found passwords, and enumerated devices on the network. This data will be uploaded to the server backend to build a comprehensive database. (Planned)
+
 Supported Operating Systems
 ---------------------------
 Wifite is designed specifically for the latest version of [**Kali** Linux](https://www.kali.org/). [ParrotSec](https://www.parrotsec.org/) is also supported.
@@ -149,3 +155,22 @@ Cracking a weak WEP password (using the WEP Replay attack):
 
 Cracking a pre-captured handshake using John The Ripper (via the `--crack` option):
 ![--crack option](https://i.imgur.com/iHcfCjp.gif)
+
+## Dual Interface Support
+
+Wifite now supports the use of two wireless interfaces simultaneously: one for scanning and one for attacking. This allows for more efficient operations when dealing with multiple targets.
+
+### Command-Line Options
+
+- `-iA [interface]`: Specify the wireless interface to use for attacks (e.g., `wlan0mon`).
+- `-iP [interface]`: Specify the wireless interface to use for scanning (e.g., `wlan1mon`).
+
+### Example Usage
+
+To run Wifite with dual interfaces, use the following command:
+
+```bash
+sudo python wifite.py -iA wlan0mon -iP wlan1mon
+```
+
+In this example, `wlan0mon` is used for attacking, while `wlan1mon` is used for scanning. Ensure that both interfaces are in monitor mode before running the command.

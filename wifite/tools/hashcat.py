@@ -144,7 +144,7 @@ class HcxPcapTool(Dependency):
             os.remove(hccapx_file)
 
         command = [
-            'hcxpcaptool',
+            'hcxpcapngtool',
             '-o', hccapx_file,
             handshake.capfile
         ]
@@ -167,7 +167,7 @@ class HcxPcapTool(Dependency):
             os.remove(john_file)
 
         command = [
-            'hcxpcaptool',
+            'hcxpcapngtool',
             '-j', john_file,
             handshake.capfile
         ]
@@ -188,7 +188,7 @@ class HcxPcapTool(Dependency):
             os.remove(self.pmkid_file)
 
         command = [
-            'hcxpcaptool',
+            'hcxpcapngtool',
             '-z', self.pmkid_file,
             pcapng_file
         ]

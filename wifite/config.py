@@ -123,7 +123,8 @@ class Configuration(object):
         cls.load_from_arguments()
 
         if load_interface:
-            cls.get_monitor_mode_interface()
+            #cls.get_monitor_mode_interface()
+            cls.get_monitor_mode_interfaces()
 
 
     @classmethod
@@ -135,6 +136,30 @@ class Configuration(object):
             cls.interface = Airmon.ask() 
             if cls.random_mac:
                 Macchanger.random()
+
+    @classmethod
+    def get_monitor_mode_interfaces(cls):
+        ''' Populates cls.interfaces with available network devices in monitor mode. '''
+        from .tools.airmon import Airmon  # Import Airmon class
+        from .model.network_interface import NetworkInterface  # Import the new class
+
+        # Use the modified ask2 method to get network interfaces
+        network_interfaces = Airmon.ask2()
+
+        # Clear existing interfaces
+        cls.interfaces = []
+
+        # Debug: Print the raw interfaces retrieved
+        print("Raw interfaces from airmon:", network_interfaces)
+
+        # Assign roles to interfaces
+        for iface in network_interfaces:
+            Color.pl('{!} {R}%s{W}' % iface.name)
+            cls.interfaces.append(iface)
+
+        # Debug: Print the final list of interfaces
+        print("Final list of interfaces:", cls.interfaces)
+        cls.interface = cls.interfaces[0].name
 
     @classmethod
     def load_from_arguments(cls):

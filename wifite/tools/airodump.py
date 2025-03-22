@@ -64,6 +64,8 @@ class Airodump(Dependency):
 
         self.delete_existing_files = delete_existing_files
 
+        self.interface_attack = interface_attack
+        self.interface_scan = interface_scan
 
     def __enter__(self):
         '''
