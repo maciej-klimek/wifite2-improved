@@ -1,0 +1,45 @@
+wlan2: SME: Trying to authenticate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: CTRL-EVENT-ASSOC-REJECT bssid=02:00:00:00:01:00 status_code=53
+wlan2: SME: Deauth request to the driver failed
+wlan2: Associated with 02:00:00:00:01:00
+wlan2: CTRL-EVENT-SUBNET-STATUS-UPDATE status=0
+wlan2: CTRL-EVENT-DISCONNECTED bssid=02:00:00:00:01:00 reason=2 locally_generated=1
+BSSID 02:00:00:00:01:00 ignore list count incremented to 2, ignoring for 10 seconds
+wlan2: CTRL-EVENT-SCAN-FAILED ret=-16 retry=1
+wlan2: SME: Trying to authenticate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: SME: Trying to authenticate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: PMKSA-CACHE-ADDED 02:00:00:00:01:00 0
+wlan2: Trying to associate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: SME: Trying to authenticate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: Trying to associate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: Associated with 02:00:00:00:01:00
+wlan2: CTRL-EVENT-SUBNET-STATUS-UPDATE status=0
+wlan2: WPA: Key negotiation completed with 02:00:00:00:01:00 [PTK=CCMP GTK=CCMP]
+wlan2: CTRL-EVENT-CONNECTED - Connection to 02:00:00:00:01:00 completed [id=0 id_str=]
+wlan2: CTRL-EVENT-DISCONNECTED bssid=02:00:00:00:01:00 reason=2 locally_generated=1
+wlan2: CTRL-EVENT-DSCP-POLICY clear_all
+wlan2: SME: Trying to authenticate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: Trying to associate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: Associated with 02:00:00:00:01:00
+wlan2: CTRL-EVENT-SUBNET-STATUS-UPDATE status=0
+wlan2: WPA: Key negotiation completed with 02:00:00:00:01:00 [PTK=CCMP GTK=CCMP]
+wlan2: CTRL-EVENT-CONNECTED - Connection to 02:00:00:00:01:00 completed [id=0 id_str=]
+wlan2: CTRL-EVENT-DISCONNECTED bssid=02:00:00:00:01:00 reason=2 locally_generated=1
+wlan2: CTRL-EVENT-DSCP-POLICY clear_all
+wlan2: CTRL-EVENT-ASSOC-REJECT bssid=02:00:00:00:01:00 status_code=53
+wlan2: SME: Deauth request to the driver failed
+wlan2: SME: Trying to authenticate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: Trying to associate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: CTRL-EVENT-DISCONNECTED bssid=02:00:00:00:01:00 reason=6
+wlan2: SME: Trying to authenticate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: Trying to associate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: CTRL-EVENT-ASSOC-REJECT bssid=02:00:00:00:01:00 status_code=53
+wlan2: PMKSA-CACHE-REMOVED 02:00:00:00:01:00 0
+wlan2: SME: Trying to authenticate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: SME: Trying to authenticate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: PMKSA-CACHE-ADDED 02:00:00:00:01:00 0
+wlan2: Trying to associate with 02:00:00:00:01:00 (SSID='testnetwork' freq=2412 MHz)
+wlan2: Associated with 02:00:00:00:01:00
+wlan2: CTRL-EVENT-SUBNET-STATUS-UPDATE status=0
+wlan2: WPA: Key negotiation completed with 02:00:00:00:01:00 [PTK=CCMP GTK=CCMP]
+wlan2: CTRL-EVENT-CONNECTED - Connection to 02:00:00:00:01:00 completed [id=0 id_str=]

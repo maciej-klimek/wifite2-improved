@@ -1,0 +1,47 @@
+❯ sudo hostapd -i wlan1 hostapd-wpa3-personal.conf
+wlan1: interface state UNINITIALIZED->ENABLED
+wlan1: AP-ENABLED 
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: associated (aid 1)
+wlan1: AP-STA-CONNECTED 02:00:00:00:02:00
+wlan1: STA 02:00:00:00:02:00 RADIUS: starting accounting session 560153C469A9935F
+wlan1: STA 02:00:00:00:02:00 WPA: pairwise key handshake completed (RSN)
+wlan1: EAPOL-4WAY-HS-COMPLETED 02:00:00:00:02:00
+wlan1: AP-STA-DISCONNECTED 02:00:00:00:02:00
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: authenticated
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: associated (aid 1)
+wlan1: AP-STA-CONNECTED 02:00:00:00:02:00
+wlan1: STA 02:00:00:00:02:00 RADIUS: starting accounting session C94643368E19DB97
+wlan1: STA 02:00:00:00:02:00 WPA: pairwise key handshake completed (RSN)
+wlan1: EAPOL-4WAY-HS-COMPLETED 02:00:00:00:02:00
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: authenticated
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: associated (aid 1)
+wlan1: STA 02:00:00:00:02:00 RADIUS: starting accounting session C94643368E19DB97
+wlan1: STA 02:00:00:00:02:00 WPA: pairwise key handshake completed (RSN)
+wlan1: EAPOL-4WAY-HS-COMPLETED 02:00:00:00:02:00
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: associated (aid 1)
+wlan1: AP-STA-DISCONNECTED 02:00:00:00:02:00
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: authenticated
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: associated (aid 1)
+wlan1: AP-STA-CONNECTED 02:00:00:00:02:00
+wlan1: STA 02:00:00:00:02:00 RADIUS: starting accounting session C94643368E19DB97
+wlan1: STA 02:00:00:00:02:00 WPA: pairwise key handshake completed (RSN)
+wlan1: EAPOL-4WAY-HS-COMPLETED 02:00:00:00:02:00
+wlan1: AP-STA-DISCONNECTED 02:00:00:00:02:00
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: authenticated
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: associated (aid 1)
+wlan1: AP-STA-CONNECTED 02:00:00:00:02:00
+wlan1: STA 02:00:00:00:02:00 RADIUS: starting accounting session 1E9C6C2992F7C5E5
+wlan1: STA 02:00:00:00:02:00 WPA: pairwise key handshake completed (RSN)
+wlan1: EAPOL-4WAY-HS-COMPLETED 02:00:00:00:02:00
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: authenticated
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: associated (aid 1)
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: authenticated
+wlan1: AP-STA-DISCONNECTED 02:00:00:00:02:00
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: Station tried to associate before authentication (aid=1 flags=0x8e80)
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: deauthenticated due to local deauth request
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: authenticated
+wlan1: STA 02:00:00:00:02:00 IEEE 802.11: associated (aid 1)
+wlan1: AP-STA-CONNECTED 02:00:00:00:02:00
+wlan1: STA 02:00:00:00:02:00 RADIUS: starting accounting session ECA1CCE01491E75D
+wlan1: STA 02:00:00:00:02:00 WPA: pairwise key handshake completed (RSN)
+wlan1: EAPOL-4WAY-HS-COMPLETED 02:00:00:00:02:00

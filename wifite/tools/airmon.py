@@ -362,7 +362,7 @@ class Airmon(Dependency):
         
         # Set the first interface to monitor mode and passive
         first_iface = airmon.get(1)
-        first_iface.interface = Airmon.start(first_iface.interface.encode('ascii','ignore'))
+        first_iface.interface = Airmon.start(first_iface.interface)
         network_interfaces.append(NetworkInterface(first_iface.interface, 'passive'))
 
         if count > 1:

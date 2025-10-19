@@ -1,0 +1,49 @@
+❯ sudo ./Wifite.py
+
+   .               .    
+ .´  ·  .     .  ·  `.  wifite 2.2.5
+ :  :  :  (¯)  :  :  :  automated wireless auditor
+ `.  ·  ` /¯\ ´  ·  .´  https://github.com/derv82/wifite2
+   `     /¯¯¯\     ´    
+
+ [!] Warning: Recommended app reaver was not found. install @ https://github.com/t6x/reaver-wps-fork-t6x
+ [!] Warning: Recommended app bully was not found. install @ https://github.com/aanarchyy/bully
+ [!] Warning: Recommended app pyrit was not found. install @ https://github.com/JPaulMora/Pyrit/wiki
+ [!] Warning: Recommended app tshark was not found. install @ apt-get install wireshark
+ [!] Warning: Recommended app hashcat was not found. install @ https://hashcat.net/hashcat/
+ [!] Warning: Recommended app hcxdumptool was not found. install @ https://github.com/ZerBea/hcxdumptool
+ [!] Warning: Recommended app hcxpcaptool was not found. install @ https://github.com/ZerBea/hcxtools
+ [!] Conflicting processes: avahi-daemon (PID 811), avahi-daemon (PID 881), NetworkManager (PID 15162), wpa_supplicant (PID 15339), hostapd (PID 17753)
+ [!] If you have problems: kill -9 PID or re-run wifite with --kill)
+
+    Interface   PHY   Driver              Chipset                                                                                                                                                          
+-----------------------------------------------------------------------
+ 1. wlan0       phy5  ??????              non-mac80211 device? (report this!)
+ 2. wlan1       phy6  ??????              non-mac80211 device? (report this!)
+ 3. wlan2       phy7  ??????              non-mac80211 device? (report this!)
+ 4. wlo1        phy0  iwlwifi             Intel Corporation Cannon Point-LP CNVi [Wireless-AC] (rev 30)
+
+ [+] enabling monitor mode on wlan0... enabled wlan0mon
+Raw interfaces from airmon: [<wifite.model.network_interface.NetworkInterface object at 0x789cd8413410>, <wifite.model.network_interface.NetworkInterface object at 0x789cd84fcb00>, <wifite.model.network_interface.NetworkInterface object at 0x789cd84de030>, <wifite.model.network_interface.NetworkInterface object at 0x789cd82f3830>]
+ [!] wlan0mon
+ [!] wlan1
+ [!] wlan2
+ [!] wlo1
+Final list of interfaces: [<wifite.model.network_interface.NetworkInterface object at 0x789cd8413410>, <wifite.model.network_interface.NetworkInterface object at 0x789cd84fcb00>, <wifite.model.network_interface.NetworkInterface object at 0x789cd84de030>, <wifite.model.network_interface.NetworkInterface object at 0x789cd82f3830>]
+
+   NUM                      ESSID   CH  ENCR  POWER  WPS?  CLIENT                                                                                                                                          
+   ---  -------------------------  ---  ----  -----  ----  ------
+     1               testnetwork     1   WPA   72db   n/a                                                                                                                                                  
+ [+] select target(s) (1-1) separated by commas, dashes or all: 1                                                                                                                                          
+ [!] Note: WPS attacks are not possible because you do not have reaver nor bully
+
+ [+] (1/1) Starting attacks against 02:00:00:00:01:00 (testnetwork)
+ [!] Skipping PMKID attack, missing required tools: hashcat, hcxdumptool, hcxpcaptool
+ [+] testnetwork (72db) WPA Handshake capture: Discovered new client: 02:00:00:00:02:00                                                                                                                    
+ [+] testnetwork (72db) WPA Handshake capture: Listening. (clients:1, deauth:3s, timeout:6m15s) ^C                                                                                                         
+
+ [!] Interrupted
+
+ [+] Finished attacking 1 target(s), exiting
+ [!] Note: Leaving interface in Monitor Mode!
+ [!] To disable Monitor Mode when finished: airmon-ng stop wlan0mon
